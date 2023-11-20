@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import tests.BaseTest;
 
 public class ProductCardPage extends BasePage {
-
     public ProductCardPage (WebDriver driver) {
 
         super(driver);

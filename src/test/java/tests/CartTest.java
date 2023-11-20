@@ -14,6 +14,8 @@ public class CartTest extends BaseTest {
 
         cartPage.openCart();
         cartPage.removeFromCart();
+        Assert.assertFalse(cartPage.isButtonDisplayed(),
+                "Product wasn't deleted");
 
     }
     @Test

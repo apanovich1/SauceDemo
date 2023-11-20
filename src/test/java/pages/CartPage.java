@@ -1,6 +1,5 @@
 package pages;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import tests.BaseTest;
@@ -11,7 +10,7 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    private final By REMOVE_FROM_CART_PATTERN = By.id("remove-sauce-labs-bike-light");
+    private final By REMOVE_FROM_CART = By.xpath("//button[text()='Remove']");
 
     private final By PRODUCT_CARD_LINK = By.cssSelector(".inventory_item_name");
 
@@ -25,7 +24,7 @@ public class CartPage extends BasePage {
     }
 
     public void removeFromCart() {
-        driver.findElement(REMOVE_FROM_CART_PATTERN).click();
+        driver.findElement(REMOVE_FROM_CART).click();
     }
 
     public void openProductCard() {
@@ -38,5 +37,9 @@ public class CartPage extends BasePage {
 
     public String getPrice() {
         return driver.findElement(PRICE).getText();
+    }
+
+    public boolean isButtonDisplayed() {
+        driver.findElement(By.xpath(REMOVE_FROM_CART)).isDisplayed();
     }
 }

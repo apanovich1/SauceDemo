@@ -39,10 +39,6 @@ public class ProductsPage extends BasePage {
         driver.findElement(CART_LINK).click();
     }
 
-    public String getQuantity() {
-        return driver.findElement(PRODUCT_QUANTITY).getText();
-    }
-
     /*public void titleShouldBe(String expectedTitle){
         Assert.assertEquals(driver.findElement(TITLE),
                 "Products",
