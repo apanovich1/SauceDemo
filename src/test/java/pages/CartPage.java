@@ -2,7 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import tests.BaseTest;
+
+import java.lang.String;
 
 public class CartPage extends BasePage {
 
@@ -17,6 +18,8 @@ public class CartPage extends BasePage {
     private final By CONTINUE_SHOPPING_BUTTON = By.id(".continue-shopping");
 
     private final By PRICE = By.id(".inventory_item_price");
+
+    private final By DESC = By.cssSelector(".inventory_item_desc");
 
     public void openCart() {
 
@@ -39,7 +42,7 @@ public class CartPage extends BasePage {
         return driver.findElement(PRICE).getText();
     }
 
-    public boolean isButtonDisplayed() {
-        driver.findElement(By.xpath(REMOVE_FROM_CART)).isDisplayed();
+    public String getProductName(){
+        return driver.findElement(PRODUCT_CARD_LINK).getText();
     }
 }

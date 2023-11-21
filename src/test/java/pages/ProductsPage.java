@@ -11,12 +11,12 @@ public class ProductsPage extends BasePage {
 
     private final By TITLE = By.cssSelector(".title");
 
-    private final String ADD_TO_CART_PATTERN = "//*[text()='%s']"
-            + "/ancestor::*[@class='inventory_item']//button";
+    private final String ADD_TO_CART_PATTERN = "//button[contains(@id, '%s')]/" +
+            "ancestor::*[@class='inventory_item']//button";
 
     private final By CART_LINK = By.id("shopping_cart_container");
 
-    private final By PRODUCT_QUANTITY = By.cssSelector(".cart_quantity");
+   // private final By PRODUCT_QUANTITY = By.cssSelector(".cart_quantity");
     public ProductsPage(WebDriver driver) {
         super(driver);
     }

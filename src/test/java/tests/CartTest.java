@@ -10,12 +10,12 @@ public class CartTest extends BaseTest {
         loginPage.open();
         loginPage.login("standard_user","secret_sauce");
 
-        productsPage.addToCart("Sauce Labs Bike Light");
-
+        productsPage.addToCart("add-to-cart-sauce-labs-bike-light");
+        productsPage.addToCart("add-to-cart-sauce-labs-backpack");
         cartPage.openCart();
-        cartPage.removeFromCart();
-        Assert.assertFalse(cartPage.isButtonDisplayed(),
-                "Product wasn't deleted");
+        cartPage.removeFromCart(); //remove first product from cart list = backpack
+        Assert.assertEquals(cartPage.getProductName(),"Sauce Labs Bike Light",
+                "Backpack is still present in the cart after deletion");
 
     }
     @Test

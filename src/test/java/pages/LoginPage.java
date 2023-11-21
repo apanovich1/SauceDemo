@@ -2,11 +2,12 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import tests.BaseTest;
 
 public class LoginPage extends BasePage {
-    WebDriver driver;
+    WebDriver driver = new ChromeDriver();
 
     private final By USERNAME_INPUT = By.id("user-name");
     private final By PASSWORD_INPUT = By.id("password");
