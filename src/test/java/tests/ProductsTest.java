@@ -8,18 +8,18 @@ import static org.testng.Assert.assertEquals;
 
 public class ProductsTest extends BaseTest {
 
-    @Test(description = "Product should be bought")
+    @Test(description = "Product should be bought", retryAnalyzer = Retry.class)
     public void buyProduct() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPage.addToCart("add-to-cart-sauce-labs-backpack");
+        productsPage.addToCart("Sauce Labs Backpack");
         productsPage.openCart();
         String productName = driver.findElement(By.cssSelector(".inventory_item_name")).getText();
-        assertEquals(productName, "Sauce Labs Bike Light",
+        assertEquals(productName, "Sauce Labs Backpack",
                 "Wrong product has been added into the cart");
     }
 
-    @Test
+    @Test(description = "Product should not be bought 2 times")
     public void buyProductTwoTime() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");

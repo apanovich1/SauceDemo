@@ -11,7 +11,7 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    private final By REMOVE_FROM_CART = By.xpath("//button[text()='Remove']");
+    private final By REMOVE_FROM_CART = By.cssSelector("//button[text()='Remove']");
 
     private final By PRODUCT_CARD_LINK = By.cssSelector(".inventory_item_name");
 

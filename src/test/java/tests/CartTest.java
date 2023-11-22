@@ -5,20 +5,20 @@ import org.testng.annotations.Test;
 
 public class CartTest extends BaseTest {
 
-    @Test
+    @Test(description = "Product should be removed from cart")
     public void removeFromCart() {
         loginPage.open();
         loginPage.login("standard_user","secret_sauce");
 
-        productsPage.addToCart("add-to-cart-sauce-labs-bike-light");
-        productsPage.addToCart("add-to-cart-sauce-labs-backpack");
+        productsPage.addToCart("Sauce Labs Bike Light");
+        productsPage.addToCart("Sauce Labs Bike Light");
         cartPage.openCart();
         cartPage.removeFromCart(); //remove first product from cart list = backpack
         Assert.assertEquals(cartPage.getProductName(),"Sauce Labs Bike Light",
                 "Backpack is still present in the cart after deletion");
 
     }
-    @Test
+    @Test(description = "User should be redirected to Product Card")
     public void redirectToProductCard() {
         loginPage.open();
         loginPage.login("standard_user","secret_sauce");
@@ -33,7 +33,7 @@ public class CartTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(description = "User should be redirected to Products page")
     public void continueShopping() {
         loginPage.open();
         loginPage.login("standard_user","secret_sauce");
@@ -47,12 +47,12 @@ public class CartTest extends BaseTest {
                 "Incorrect link to Products page");
     }
 
-    @Test
+    @Test(description = "Price of product should be correct")
     public void checkPrice() {
         loginPage.open();
         loginPage.login("standard_user","secret_sauce");
-
-        productsPage.addToCart("Sauce Labs Backpack");
+        productsPage.open();
+        productsPage.addToCart("add-to-cart-sauce-labs-backpack");
 
         cartPage.openCart();
         Assert.assertEquals(cartPage.getPrice(),

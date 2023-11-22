@@ -4,8 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.*;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductCardPage;
@@ -13,6 +13,7 @@ import pages.ProductsPage;
 
 import java.util.concurrent.TimeUnit;
 
+@Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
 
@@ -23,12 +24,19 @@ public class BaseTest {
     CartPage cartPage;
 
     ProductCardPage productCard;
-    @BeforeMethod
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        this.driver = new ChromeDriver(options);
+    @Parameters({"browser"})
+    @BeforeMethod(description = "Browser set up")
+    public void setUp(@Optional("chrome") String browser) {
+        if(browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("start-maximized");
+            options.addArguments("headless");
+            this.driver = new ChromeDriver(options);
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
         this.driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
 
         loginPage = new LoginPage(driver);
@@ -37,7 +45,7 @@ public class BaseTest {
         productCard = new ProductCardPage(driver);
     }
 
-   @AfterMethod(alwaysRun = true)
+   @AfterMethod(alwaysRun = true, description = "Browser out")
     public void tearDown() {
 
         this.driver.quit();
