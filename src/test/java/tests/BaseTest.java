@@ -11,6 +11,7 @@ import pages.LoginPage;
 import pages.ProductCardPage;
 import pages.ProductsPage;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
@@ -23,10 +24,12 @@ public class BaseTest {
 
     CartPage cartPage;
 
-    ProductCardPage productCard;
+    ProductCardPage productCardPage;
+
     @Parameters({"browser"})
     @BeforeMethod(description = "Browser set up")
     public void setUp(@Optional("chrome") String browser) {
+        System.out.println(System.getProperty("hi"));
         if(browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
@@ -37,12 +40,12 @@ public class BaseTest {
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         }
-        this.driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
-        productCard = new ProductCardPage(driver);
+        productCardPage = new ProductCardPage(driver);
     }
 
    @AfterMethod(alwaysRun = true, description = "Browser out")

@@ -2,7 +2,6 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import java.lang.String;
 
 import static org.testng.Assert.assertEquals;
 
@@ -23,8 +22,8 @@ public class ProductsTest extends BaseTest {
     public void buyProductTwoTime() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPage.addToCart("add-to-cart-sauce-labs-backpack");
-        productsPage.addToCart("add-to-cart-sauce-labs-backpack");
+        productsPage.addToCart("Sauce Labs Backpack");
+        productsPage.addToCart("Sauce Labs Backpack");
         productsPage.openCart();
 
         /*assertEquals(productsPage.getQuantity(), "1",

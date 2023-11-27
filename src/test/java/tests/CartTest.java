@@ -11,9 +11,9 @@ public class CartTest extends BaseTest {
         loginPage.login("standard_user","secret_sauce");
 
         productsPage.addToCart("Sauce Labs Bike Light");
-        productsPage.addToCart("Sauce Labs Bike Light");
+        productsPage.addToCart("Sauce Labs Backpack");
         cartPage.openCart();
-        cartPage.removeFromCart(); //remove first product from cart list = backpack
+        cartPage.removeFromCart("Sauce Labs Backpack"); //remove first product from cart list = backpack
         Assert.assertEquals(cartPage.getProductName(),"Sauce Labs Bike Light",
                 "Backpack is still present in the cart after deletion");
 
@@ -27,7 +27,7 @@ public class CartTest extends BaseTest {
 
         cartPage.openCart();
         cartPage.openProductCard();
-        Assert.assertEquals(productCard.getTitle(),
+        Assert.assertEquals(productCardPage.getTitle(),
                 "Sauce Labs Backpack",
                 "Incorrect link to product card");
 
@@ -52,7 +52,7 @@ public class CartTest extends BaseTest {
         loginPage.open();
         loginPage.login("standard_user","secret_sauce");
         productsPage.open();
-        productsPage.addToCart("add-to-cart-sauce-labs-backpack");
+        productsPage.addToCart("Sauce Labs Backpack");
 
         cartPage.openCart();
         Assert.assertEquals(cartPage.getPrice(),

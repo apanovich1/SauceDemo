@@ -1,13 +1,8 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import tests.BaseTest;
-
-import java.lang.String;
-
 public class LoginTest extends BaseTest {
 
     @Test(description = "User should be logged in")
@@ -41,24 +36,27 @@ public class LoginTest extends BaseTest {
     public void emptyEnter() {
         loginPage.open();
         loginPage.login(" "," ");
-        Assert.assertTrue(loginPage.getError().contains("Epic sadface: " +
-                "Username is required"));
+        Assert.assertEquals(loginPage.getError(),"Epic sadface: Username and" +
+                        " password do not match any user in this service",
+                "A user is able to login with empty enters/incorrect text of error");
+
     }
 
     @Test(description = "User should not be logged in")
     public void emptyPassword() {
         loginPage.open();
-        loginPage.login("standard_user"," ");
-        Assert.assertTrue(loginPage.getError().contains("Epic sadface: " +
-                "Password is required"));
+        loginPage.login("standard_user","");
+        Assert.assertEquals(loginPage.getError(),"Epic sadface: Password is required",
+                "A user is able to login with empty password/incorrect text of error");
     }
 
 
     @Test(description = "User should not be logged in")
     public void incorrectUsername() {
         loginPage.open();
-        loginPage.login("standard_user","secret_sauce");
-        Assert.assertEquals(loginPage.getError(),"Epic sadface: Username" +
-                " and password do not match any user in this service");
+        loginPage.login("standard_user1","secret_sauce");
+        Assert.assertEquals(loginPage.getError(),"Epic sadface: Username and password " +
+                "do not match any user in this service",
+                "User with incorrect username is able to login/incorrect text of error");
     }
 }

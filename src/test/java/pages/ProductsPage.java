@@ -2,10 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProductsPage extends BasePage {
 
-    private final By TITLE = By.cssSelector(".header_secondary_container");
+    private final By TITLE = By.cssSelector(".title");
     private final String ADD_TO_CART_PATTERN = "//*[text()='%s']/ancestor::*[@class='inventory_item']//button";
     private final By CART_LINK = By.id("shopping_cart_container");
 
@@ -18,6 +19,8 @@ public class ProductsPage extends BasePage {
     }
 
     public String getTitle() {
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
         return driver.findElement(TITLE).getText();
     }
 

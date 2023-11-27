@@ -3,21 +3,19 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.lang.String;
-
 public class CartPage extends BasePage {
 
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
-    private final By REMOVE_FROM_CART = By.cssSelector("//button[text()='Remove']");
+    private final String REMOVE_FROM_CART = "//*[text()='%s']/ancestor::*[@class='cart_item_label']//button";
 
     private final By PRODUCT_CARD_LINK = By.cssSelector(".inventory_item_name");
 
-    private final By CONTINUE_SHOPPING_BUTTON = By.id(".continue-shopping");
+    private final By CONTINUE_SHOPPING_BUTTON = By.id("continue-shopping");
 
-    private final By PRICE = By.id(".inventory_item_price");
+    private final By PRICE = By.cssSelector(".inventory_item_price");
 
     private final By DESC = By.cssSelector(".inventory_item_desc");
 
@@ -26,8 +24,9 @@ public class CartPage extends BasePage {
         driver.get(BASE_URL + "cart.html");
     }
 
-    public void removeFromCart() {
-        driver.findElement(REMOVE_FROM_CART).click();
+    public void removeFromCart(String productName) {
+        By removeButton = By.xpath(String.format(REMOVE_FROM_CART, productName));
+        driver.findElement(removeButton).click();;
     }
 
     public void openProductCard() {
@@ -35,6 +34,7 @@ public class CartPage extends BasePage {
     }
 
     public void continueShopping() {
+
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
     }
 
