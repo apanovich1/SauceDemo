@@ -10,6 +10,7 @@ import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductCardPage;
 import pages.ProductsPage;
+import org.testng.ITestContext;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -28,7 +29,7 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeMethod(description = "Browser set up")
-    public void setUp(@Optional("chrome") String browser) {
+    public void setUp(@Optional("chrome") String browser, ITestContext testContext) {
         System.out.println(System.getProperty("hi"));
         if(browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
@@ -40,6 +41,7 @@ public class BaseTest {
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         }
+        testContext.setAttribute("driver", driver);
         this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         loginPage = new LoginPage(driver);
