@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.*;
 import pages.CartPage;
 import pages.LoginPage;
@@ -39,7 +40,10 @@ public class BaseTest {
             this.driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("start-maximized");
+            options.addArguments("headless");
+            driver = new FirefoxDriver(options);
         }
         testContext.setAttribute("driver", driver);
         this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -48,6 +52,8 @@ public class BaseTest {
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         productCardPage = new ProductCardPage(driver);
+
+
     }
 
    @AfterMethod(alwaysRun = true, description = "Browser out")
