@@ -1,9 +1,11 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+@Log4j2
 
 public class LoginPage extends BasePage {
     //WebDriver driver = new ChromeDriver();
@@ -19,20 +21,22 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Step("opening login page")
+    @Step("Opening login page")
     public void open() {
-
+        log.info("Opening login page");
         driver.get("https://www.saucedemo.com/");
     }
 
-    @Step("login by {user}")
+    @Step("Login by {user}")
     public void login(String user, String password) {
+        log.info("Login into saucedemo");
         driver.findElement(USERNAME_INPUT).sendKeys(user);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
     }
 
     public String getError() {
+        log.info("Getting login error");
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 }
