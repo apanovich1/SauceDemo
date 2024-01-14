@@ -18,35 +18,29 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
-    @Step("open inventory page")
+    @Step("Open inventory page")
     public void open() {
-        log.info("opening inventory page");
+        log.info("Opening inventory page");
         driver.get(BASE_URL + "inventory.html");
     }
 
-    @Step("get title of page Products")
+    @Step("Get title of page Products")
     public String getTitle() {
-        log.info("getting Product title");
+        log.info("Getting Product title");
         wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
         return driver.findElement(TITLE).getText();
     }
 
-    @Step("add product to cart")
+    @Step("Add product to cart")
     public void addToCart(String product) {
-        log.info("adding '{}' into cart", product);
+        log.info("Adding product number '{}' into cart", product);
         By addToCartButton = By.xpath(String.format(ADD_TO_CART_PATTERN, product));
         driver.findElement(addToCartButton).click();
     }
 
-    public void addToCart(int index) {
-        log.info("adding '{}' into cart", index);
-        driver.findElements(By.xpath("//*[@class='inventory_item']//button"))
-                .get(index).click();
-    }
-
-    @Step("open cart")
+    @Step("Open cart")
     public void openCart() {
-        log.info("opening cart page");
+        log.info("Opening cart page");
         driver.findElement(CART_LINK).click();
     }
 }

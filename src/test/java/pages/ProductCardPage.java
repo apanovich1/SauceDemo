@@ -15,9 +15,9 @@ public class ProductCardPage extends BasePage {
         super(driver);
     }
 
-    @Step("get title of product card page")
+    @Step("Get title of product card page")
     public String getTitle() {
-        log.info("getting title of product");
+        log.info("Getting title of product");
         return driver.findElement(PRODUCT_CARD_HEADER).getText();
     }
 }

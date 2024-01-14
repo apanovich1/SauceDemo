@@ -22,40 +22,40 @@ public class CartPage extends BasePage {
 
     private final By DESC = By.cssSelector(".inventory_item_desc");
 
-    @Step("open cart")
+    @Step("Open cart")
     public void openCart() {
-        log.info("opening cart");
+        log.info("Opening cart");
         driver.get(BASE_URL + "cart.html");
     }
 
-    @Step("remove from cart")
+    @Step("Remove from cart")
     public void removeFromCart(String productName) {
-        log.info("removing '{}' cart", productName);
+        log.info("Removing '{}' cart", productName);
         By removeButton = By.xpath(String.format(REMOVE_FROM_CART, productName));
         driver.findElement(removeButton).click();;
     }
 
-    @Step("open product card")
+    @Step("Open product card")
     public void openProductCard() {
-        log.info("opening product card");
+        log.info("Opening product card");
         driver.findElement(PRODUCT_CARD_LINK).click();
     }
 
-    @Step("continue shopping")
+    @Step("Continue shopping")
     public void continueShopping() {
-        log.info("continuing shopping");
+        log.info("Continuing shopping");
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
     }
 
-    @Step("get price")
+    @Step("Get price")
     public String getPrice() {
-        log.info("getting price");
+        log.info("Getting price");
         return driver.findElement(PRICE).getText();
     }
 
-    @Step("get product name")
+    @Step("Get product name")
     public String getProductName(){
-        log.info("getting product name");
+        log.info("Getting product name");
         return driver.findElement(PRODUCT_CARD_LINK).getText();
     }
 }

@@ -21,22 +21,22 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Step("opening login page")
+    @Step("Opening login page")
     public void open() {
-        log.info("opening login page");
+        log.info("Opening login page");
         driver.get("https://www.saucedemo.com/");
     }
 
-    @Step("login by {user}")
+    @Step("Login by {user}")
     public void login(String user, String password) {
-        log.info("login in into saucedemo");
+        log.info("Login into saucedemo");
         driver.findElement(USERNAME_INPUT).sendKeys(user);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
     }
 
     public String getError() {
-        log.info("getting login error");
+        log.info("Getting login error");
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 }
